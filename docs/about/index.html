@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>About me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=8ba523071e.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=8ba523071e">
+    
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/inter-roman.woff2%3Fv=8ba523071e" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url(../assets/fonts/inter-roman.woff2%3Fv=8ba523071e) format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.css">
+    <style>
+.gh-content {
+    position: relative;
+ }
+
+.gh-toc > .toc-list {
+    position: relative;
+}
+
+.toc-list {
+    overflow: hidden;
+    list-style: none;
+}
+
+@media (min-width: 1300px) {
+     .gh-sidebar {
+        position: absolute; 
+        top: 0;
+        bottom: 0;
+        margin-top: 4vmin;
+        grid-column: wide-start / main-start; /* Place the TOC to the left of the content */
+    }
+   
+    .gh-toc {
+        position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
+        top: 4vmin;
+    }
+}
+
+.gh-toc .is-active-link::before {
+    background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+} 
+</style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=8ba523071e.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+
+        if (accentColor.length === 3) {
+            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
+        }
+
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Gianelli HomeLab">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About me">
+    <meta property="og:description" content="Engineering school student, I am passionate about computer science and new technologies.
+
+
+Education
+
+
+2022 – 2025, Telecom Nancy
+
+ * Engineering school specialized in computer science
+ * ISS Option: Internet Systems and Security
+
+
+2024, Norwegian University of Science and Technology
+
+ * ERASMUS semester in Trondheim
+ * Courses in Networks and Security
+
+
+2020 – 2022, Centre International de">
+    <meta property="og:url" content="https://gianelli.net/about/">
+    <meta property="og:image" content="https://gianelli.net/content/images/2025/03/ca14047f2047b17b4b582ca4e14fff75.jpg">
+    <meta property="article:published_time" content="2025-03-09T21:39:38.000Z">
+    <meta property="article:modified_time" content="2025-03-10T22:01:12.000Z">
+    <meta property="article:publisher" content="https://www.facebook.com/ghost">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About me">
+    <meta name="twitter:description" content="Engineering school student, I am passionate about computer science and new technologies.
+
+
+Education
+
+
+2022 – 2025, Telecom Nancy
+
+ * Engineering school specialized in computer science
+ * ISS Option: Internet Systems and Security
+
+
+2024, Norwegian University of Science and Technology
+
+ * ERASMUS semester in Trondheim
+ * Courses in Networks and Security
+
+
+2020 – 2022, Centre International de">
+    <meta name="twitter:url" content="https://gianelli.net/about/">
+    <meta name="twitter:image" content="https://gianelli.net/content/images/2025/03/ca14047f2047b17b4b582ca4e14fff75.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Thomas Gianelli">
+    <meta name="twitter:site" content="@ghost">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="400">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Gianelli HomeLab",
+        "url": "https://gianelli.net/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://gianelli.net/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Thomas Gianelli",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gianelli.net/content/images/2025/03/IMG_8286.JPG",
+            "width": 1200,
+            "height": 800
+        },
+        "url": "https://gianelli.net/author/thomas/",
+        "sameAs": []
+    },
+    "headline": "About me",
+    "url": "https://gianelli.net/about/",
+    "datePublished": "2025-03-09T21:39:38.000Z",
+    "dateModified": "2025-03-10T22:01:12.000Z",
+    "description": "Engineering school student, I am passionate about computer science and new technologies.\n\n\nEducation\n\n\n2022 – 2025, Telecom Nancy\n\n * Engineering school specialized in computer science\n * ISS Option: Internet Systems and Security\n\n\n2024, Norwegian University of Science and Technology\n\n * ERASMUS semester in Trondheim\n * Courses in Networks and Security\n\n\n2020 – 2022, Centre International de Valbonne\n\n * Preparatory class for top engineering schools\n * Mathematics and Physics, with a focus on com",
+    "mainEntityOfPage": "https://gianelli.net/about/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.111">
+    <link rel="alternate" type="application/rss+xml" title="Gianelli HomeLab" href="../rss/index.html">
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.50/umd/portal.min.js" data-i18n="true" data-ghost="https://gianelli.net/" data-key="b84960009d78b6fc8be0675c52" data-api="https://gianelli.net/ghost/api/content/" data-locale="en" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.5/umd/sodo-search.min.js" data-key="b84960009d78b6fc8be0675c52" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.5/umd/main.css" data-sodo-search="https://gianelli.net/" data-locale="en" crossorigin="anonymous"></script>
+    
+    <link href="https://gianelli.net/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=8ba523071e"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=8ba523071e.css">
+    <script defer src="../public/member-attribution.min.js%3Fv=8ba523071e"></script><style>:root {--ghost-accent-color: #2f3880;}</style>
+    <style>
+.reading-progress {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 5px; /* Progress bar height */
+  background: #c5d2d9; /* Progress bar background color */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; /* Hide default progress bar */
+}
+
+.reading-progress::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.reading-progress::-webkit-progress-value {
+  background: var(--ghost-accent-color); /* Progress bar color */
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
+<style>
+  pre[class*="language-"] {
+      font-size: 0.9em;
+  }
+</style>
+
+</head>
+<body class="page-template page-about has-sans-title has-sans-body">
+
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-middle-logo gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Gianelli HomeLab
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about-me nav-current"><a href="index.html">About me</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>                <div class="gh-navigation-members">
+                            <a href="index.html#/portal/signin" data-portal="signin">Sign in</a>
+                                <a class="gh-button" href="index.html#/portal/signup" data-portal="signup">Subscribe</a>
+                </div>
+        </div>
+
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+    <article class="gh-article post no-image">
+
+            <header class="gh-article-header gh-canvas">
+                <h1 class="gh-article-title is-title">About me</h1>
+                            </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p>Engineering school student, I am passionate about computer science and new technologies.</p><hr><h2 id="education">Education</h2><h3 id="2022-%E2%80%93-2025-telecom-nancy">2022 – 2025, Telecom Nancy</h3><ul><li>Engineering school specialized in computer science</li><li>ISS Option: Internet Systems and Security</li></ul><h3 id="2024-norwegian-university-of-science-and-technology">2024, Norwegian University of Science and Technology</h3><ul><li>ERASMUS semester in Trondheim</li><li>Courses in Networks and Security</li></ul><h3 id="2020-%E2%80%93-2022-centre-international-de-valbonne"><strong>2020 – 2022, Centre International de Valbonne</strong></h3><ul><li>Preparatory class for top engineering schools</li><li>Mathematics and Physics, with a focus on computer science</li></ul><h3 id="2017-%E2%80%93-2020-lyc%C3%A9e-jean-moulin-draguignan">2017 – 2020, Lycée Jean Moulin, Draguignan</h3><ul><li>Baccalauréat S, with Highest Honors (Très Bien)</li></ul><hr><h2 id="professional-experience">Professional Experience</h2><h3 id="2024-industrial-project-telecom-nancy-%E2%80%93-ar%C3%A9al">2024, Industrial Project, Telecom Nancy – Aréal</h3><ul><li>Security audit of an industrial supervision platform</li></ul><h3 id="summer-2024-various-temporary-jobs">Summer 2024, Various Temporary Jobs</h3><ul><li>Bottling in wine estates, shelf stocking in supermarkets, moving</li></ul><h3 id="2023-student-council-telecom-nancy">2023, Student Council, Telecom Nancy</h3><ul><li>Partnerships Manager</li></ul><h3 id="summer-2023-operator-internship-perrotton">Summer 2023, Operator Internship, Perrotton</h3><ul><li>Machining metal parts for the automotive industry</li></ul><hr><h2 id="projects">Projects</h2><h3 id="2024-%E2%80%93-2025-home-lab">2024 – 2025, Home Lab</h3><ul><li>Use of various technologies, Proxmox, virtualization, Docker, LXC containers…</li></ul><h3 id="2024-windows-xp-malware">2024, Windows XP Malware</h3><ul><li>Development of a C++ program aimed at hiding its behavior and preventing debugging with tools such as IDA.</li></ul><h3 id="2024-development-of-an-android-iot-application">2024, Development of an Android IOT Application </h3><ul><li>Development of an Android application in Java and Kotlin to retrieve sensor data in real time.</li></ul><h3 id="2024-penetration-testing-and-vulnerability-fixing-for-a-django-website">2024, Penetration Testing and Vulnerability Fixing for a Django Website</h3><ul><li>Exploring web vulnerabilities, OWASP, Django framework</li></ul><h3 id="2024-development-of-a-equipment-loan-application">2024, Development of a Equipment Loan Application</h3><ul><li>Development in Java, using JavaFX and SceneBuilder</li></ul><h3 id="2023-development-of-an-electric-car-route-planning-application">2023, Development of an Electric Car Route Planning Application</h3><ul><li>Development in C, finding the best route based on different vehicle capacities</li></ul><h3 id="2023-development-of-an-ios-application-for-sudoku-solving">2023, Development of an iOS Application for Sudoku Solving</h3><ul><li>Development in Swift, backtracking algorithm</li></ul><h3 id="2022-development-of-a-web-application-for-selling-fruits-and-vegetables-between-individuals">2022, Development of a Web Application for Selling Fruits and Vegetables Between Individuals</h3><ul><li>Development in Python (Flask framework), HTML, CSS, and SQL database</li></ul><hr><h2 id="skills">Skills</h2><h3 id="programming-languages"><strong>Programmi</strong>ng Lan<strong>guages</strong></h3><ul><li>Python, C, Java, Assembly (ARM 32-bit), Swift</li></ul><h3 id="development-tools">Development Tools</h3><ul><li>Git, Bash, Docker</li></ul><h3 id="presentation-tools">Presentation Tools</h3><ul><li>LaTeX, WordPress, Office Suite</li></ul><h3 id="languages">Languages</h3><ul><li>French (native), English (B2, 910 TOEIC), Spanish (high school level)</li></ul><hr><h2 id="contact-me">Contact me</h2><h3 id="linkedin">Linkedin</h3><ul><li><a href="https://www.linkedin.com/in/thomas-gianelli?ref=gianelli.net">https://www.linkedin.com/in/thomas-gianelli</a></li></ul><h3 id="e-mail">E-Mail</h3><ul><li><a href="https://gianelli.net/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2054484f4d41530e4749414e454c4c496054454c45434f4d4e414e43590e4e4554">[email&#160;protected]</a></li></ul><h3 id="strava">Strava</h3><ul><li><a href="https://www.strava.com/athletes/thomas-gianelli?ref=gianelli.net" rel="noreferrer">https://www.strava.com/athletes/thomas-gianelli</a></li></ul><p></p>
+        </section>
+
+    </article>
+</main>
+
+
+    
+    <footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Gianelli HomeLab
+            </span>
+            <nav class="gh-footer-menu">
+                <ul class="nav">
+    <li class="nav-sign-up"><a href="index.html#/portal/">Sign up</a></li>
+</ul>
+
+            </nav>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
+        </div>
+
+                <section class="gh-footer-signup">
+                    <h2 class="gh-footer-signup-header is-title">
+                        Gianelli HomeLab
+                    </h2>
+                    <p class="gh-footer-signup-subhead is-body">
+                        
+                    </p>
+                    <form class="gh-form" data-members-form>
+    <input class="gh-form-input" id="footer-email" name="email" type="email" placeholder="jamie@example.com" required data-members-email>
+    <button class="gh-button" type="submit" aria-label="Subscribe">
+        <span><span>Subscribe</span> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path></svg></span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24">
+    <g stroke-linecap="round" stroke-width="2" fill="currentColor" stroke="none" stroke-linejoin="round" class="nc-icon-wrapper">
+        <g class="nc-loop-dots-4-24-icon-o">
+            <circle cx="4" cy="12" r="3"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+            <circle cx="20" cy="12" r="3"></circle>
+        </g>
+        <style data-cap="butt">
+            .nc-loop-dots-4-24-icon-o{--animation-duration:0.8s}
+            .nc-loop-dots-4-24-icon-o *{opacity:.4;transform:scale(.75);animation:nc-loop-dots-4-anim var(--animation-duration) infinite}
+            .nc-loop-dots-4-24-icon-o :nth-child(1){transform-origin:4px 12px;animation-delay:-.3s;animation-delay:calc(var(--animation-duration)/-2.666)}
+            .nc-loop-dots-4-24-icon-o :nth-child(2){transform-origin:12px 12px;animation-delay:-.15s;animation-delay:calc(var(--animation-duration)/-5.333)}
+            .nc-loop-dots-4-24-icon-o :nth-child(3){transform-origin:20px 12px}
+            @keyframes nc-loop-dots-4-anim{0%,100%{opacity:.4;transform:scale(.75)}50%{opacity:1;transform:scale(1)}}
+        </style>
+    </g>
+</svg>        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    <style>
+        .checkmark {
+            width: 40px;
+            height: 40px;
+            display: block;
+            stroke-width: 2.5;
+            stroke: currentColor;
+            stroke-miterlimit: 10;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+</svg>    </button>
+    <p data-members-error></p>
+</form>                </section>
+
+    </div>
+</footer>    
+</div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/built/source.js%3Fv=8ba523071e"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.gh-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.gh-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3, h4',
+        // Ensure correct positioning
+        hasInnerContainers: true,
+    });
+</script>
+
+
+</body>
+</html>

